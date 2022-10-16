@@ -6,6 +6,9 @@ import ZIcon, { ZIcons } from "./base/coreServices/components/icon/ZIcon";
 import ZLoadingButton from "./base/coreServices/components/button/ZLoadingButton";
 import ZDialog from "./base/coreServices/components/dialog/ZDialog";
 import ZAlertDialog from "./base/coreServices/components/dialog/ZAlertDialog";
+import ZSnackbar, {
+  Severity,
+} from "./base/coreServices/components/snackbar/ZSnackbar";
 
 function App() {
   const [o, setO] = React.useState(false);
@@ -28,16 +31,13 @@ function App() {
       >
         i have nothing to say
       </ZDialog>
-      {/* <ZAlertDialog
-        message="some text message"
+      <ZSnackbar
+        alert
+        message={"SOME MESSAGE"}
         open={o}
         onClose={() => setO(false)}
-        actions={[
-          { title: "Button 1", onClick: () => setO(false) },
-          { title: "Button 2", onClick: () => setO(false) },
-          { title: "Button 3", onClick: () => setO(false) },
-        ]}
-      ></ZAlertDialog> */}
+        severity={Severity.info}
+      />
     </div>
   );
 }
