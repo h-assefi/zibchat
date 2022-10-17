@@ -25,10 +25,10 @@ const ZAlertDialog = ({ actions, message, open, onClose, title }) => {
   );
 };
 
-export default ZAlertDialog;
-
 ZAlertDialog.propTypes = {
   message: PropTypes.string.isRequired,
   open: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
+
+export default ZAlertDialog;
