@@ -37,6 +37,7 @@ const ZSwitch = ({
   checked,
   label,
   labelPlacement = ZSwitchLabelPlacement.end,
+  onChange,
   theme = ZSwitchTheme.default,
 }) => {
   return (
@@ -44,15 +45,23 @@ const ZSwitch = ({
       <FormControlLabel
         control={
           theme === ZSwitchTheme.iOS ? (
-            <IOSSwitch sx={{ m: 1 }} checked={checked} />
+            <IOSSwitch sx={{ m: 1 }} checked={checked} onChange={onChange} />
           ) : theme === ZSwitchTheme.android12 ? (
-            <Android12Switch sx={{ m: 1 }} checked={checked} />
+            <Android12Switch
+              sx={{ m: 1 }}
+              checked={checked}
+              onChange={onChange}
+            />
           ) : theme === ZSwitchTheme.mui ? (
-            <MaterialUISwitch sx={{ m: 1 }} checked={checked} />
+            <MaterialUISwitch
+              sx={{ m: 1 }}
+              checked={checked}
+              onChange={onChange}
+            />
           ) : theme === ZSwitchTheme.ant ? (
-            <AntSwitch sx={{ m: 1 }} checked={checked} />
+            <AntSwitch sx={{ m: 1 }} checked={checked} onChange={onChange} />
           ) : (
-            <Switch color={color} checked={checked} />
+            <Switch color={color} checked={checked} onChange={onChange} />
           )
         }
         label={label}
