@@ -1,13 +1,59 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+const theme = createTheme({
+  direction: "rtl", // Both here and <body dir="rtl">
+  typography: {
+    fontFamily: ["Farhang", "tahoma"].join(","),
+    fontWeightBold: 700,
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+      @font-face {
+        font-family: 'Farhang';
+        font-style: normal;
+        font-weight: 400;
+        src: url('./assets/fonts/Farhang2FaNum-Medium.woff') format('woff'),
+             url('./assets/fonts/Farhang2FaNum-Medium.woff2') format('woff2'),
+             url('./assets/fonts/Farhang2FaNum-Medium.ttf') format('truetype');
+      }
+      @font-face {
+        font-family: 'Farhang';
+        font-weight: 700;
+        src: url('./assets/fonts/Farhang2FaNum-Bold.woff') format('woff'),
+             url('./assets/fonts/Farhang2FaNum-Bold.woff2') format('woff2'),
+             url('./assets/fonts/Farhang2FaNum-Bold.ttf') format('truetype');
+      }
+      `,
+    },
+  },
+});
+// Create rtl cache
+const cacheRtl = createCache({
+  key: "muirtl",
+  stylisPlugins: [prefixer, rtlPlugin],
+});
+
 root.render(
   <React.StrictMode>
-    <App />
+    <CacheProvider value={cacheRtl}>
+      <ThemeProvider theme={theme}>
+        <div dir="rtl">
+          <App />
+        </div>
+      </ThemeProvider>
+    </CacheProvider>
   </React.StrictMode>
 );
 
