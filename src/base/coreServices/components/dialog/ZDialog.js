@@ -6,11 +6,19 @@ import DialogContent from "@mui/material/DialogContent";
 import ZIconButton from "../button/ZIconButton";
 import ZIcon, { ZIcons } from "../icon/ZIcon";
 
-const ZDialog = ({ children, closeIcon, dividers, open, onClose, title }) => {
+const ZDialog = ({
+  children,
+  closeIcon,
+  dir = "rtl",
+  dividers,
+  open,
+  onClose,
+  title,
+}) => {
   return (
     <Dialog open={open} onClose={onClose}>
       {title && (
-        <DialogTitle>
+        <DialogTitle dir={dir}>
           {onClose && closeIcon ? (
             <ZIconButton
               ariaLabel="close"
@@ -36,6 +44,5 @@ const ZDialog = ({ children, closeIcon, dividers, open, onClose, title }) => {
 export default ZDialog;
 
 ZDialog.propTypes = {
-  open: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };

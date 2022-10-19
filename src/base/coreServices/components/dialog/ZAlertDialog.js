@@ -5,21 +5,39 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
-import ZButton from "../button/ZButton";
+import ZButton, { ZButtonSize, ZButtonVariant } from "../button/ZButton";
 
-const ZAlertDialog = ({ actions, message, open, onClose, title }) => {
+const ZAlertDialog = ({
+  actions,
+  dir = "rtl",
+  message,
+  open,
+  okTitle = "خُب",
+  onClose,
+  title,
+}) => {
   return (
     <Dialog open={open} onClose={onClose}>
-      {title && <DialogTitle>{title}</DialogTitle>}
+      {title && (
+        <DialogTitle dir={dir} fontWeight="bold">
+          {title}
+        </DialogTitle>
+      )}
       <DialogContent>
-        <DialogContentText>{message}</DialogContentText>
+        <DialogContentText dir={dir}>{message}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        {actions.map((action) => {
-          return (
-            <ZButton onClick={action.onClick}>{action.title ?? ""}</ZButton>
-          );
-        })}
+        {actions ? (
+          actions.map((action) => {
+            return (
+              <ZButton onClick={action.onClick}>{action.title ?? ""}</ZButton>
+            );
+          })
+        ) : (
+          <ZButton variant={ZButtonVariant.contained} onClick={onClose}>
+            {okTitle}
+          </ZButton>
+        )}
       </DialogActions>
     </Dialog>
   );
@@ -27,7 +45,6 @@ const ZAlertDialog = ({ actions, message, open, onClose, title }) => {
 
 ZAlertDialog.propTypes = {
   message: PropTypes.string.isRequired,
-  open: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
