@@ -27,13 +27,16 @@ const ZButton = ({
   href,
   onClick,
   size,
+
   variant,
   startIcon,
   endIcon,
   type,
+  ...rest
 }) => {
   return (
     <Button
+      {...rest}
       onClick={onClick}
       variant={variant}
       color={color}
