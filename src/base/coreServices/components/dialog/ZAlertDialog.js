@@ -5,7 +5,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
-import ZButton, { ZButtonSize, ZButtonVariant } from "../button/ZButton";
+import ZButton, { ZButtonVariant } from "../button/ZButton";
 
 const ZAlertDialog = ({
   actions,

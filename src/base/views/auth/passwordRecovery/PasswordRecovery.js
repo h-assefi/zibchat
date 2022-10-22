@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import ZButton, {
@@ -6,13 +5,9 @@ import ZButton, {
   ZButtonVariant,
 } from "src/base/coreServices/components/button/ZButton";
 import { ZFormGroup } from "src/base/coreServices/components/container/ZFormGroup";
-import ZTextField, {
-  ZTextFieldType,
-} from "src/base/coreServices/components/textField/ZTextField";
+import ZTextField from "src/base/coreServices/components/textField/ZTextField";
 import "src/assets/css/login.css";
 import ZSpacer from "src/base/coreServices/components/container/ZSpacer";
-import ZIconButton from "src/base/coreServices/components/button/ZIconButton";
-import ZIcon, { ZIcons } from "src/base/coreServices/components/icon/ZIcon";
 import { useNavigate } from "react-router-dom";
 import ZLabel from "src/base/coreServices/components/Label/ZLabel";
 import MobileEmailOption from "./MobileEmailOption";
@@ -24,7 +19,6 @@ import ConfirmRecoverCode from "./ConfirmRecoverCode";
 import { dateDiffInDays } from "src/base/coreServices/tools/ToolsService";
 
 const PasswordRecovery = () => {
-  let params = useParams();
   let navigate = useNavigate();
 
   const [confirmCode, setConfirmCode] = React.useState({
@@ -43,7 +37,6 @@ const PasswordRecovery = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 

@@ -7,12 +7,10 @@ import ZButton, {
 import { ZFormGroup } from "src/base/coreServices/components/container/ZFormGroup";
 import ZSpacer from "src/base/coreServices/components/container/ZSpacer";
 import ZDialog from "src/base/coreServices/components/dialog/ZDialog";
-import ZLabel from "src/base/coreServices/components/Label/ZLabel";
 import CircularProgressWithLabel from "src/base/coreServices/components/progress/ProgressWithLabel";
 import ZTextField, {
   ZTextFieldSize,
 } from "src/base/coreServices/components/textField/ZTextField";
-import ZTextFieldMask from "src/base/coreServices/components/textField/ZTextFieldMask";
 import { dateDiffInDays } from "src/base/coreServices/tools/ToolsService";
 
 const ConfirmRecoverCode = ({ type, value, onClose, resume }) => {

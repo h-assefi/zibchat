@@ -12,7 +12,7 @@ import "src/assets/css/login.css";
 import ZSpacer from "src/base/coreServices/components/container/ZSpacer";
 import ZIconButton from "src/base/coreServices/components/button/ZIconButton";
 import ZIcon, { ZIcons } from "src/base/coreServices/components/icon/ZIcon";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [passVisible, setPassVisible] = React.useState(false);
