@@ -38,6 +38,12 @@ const theme = createTheme({
       `,
     },
   },
+  palette: {
+    primary: {
+      main: "#6a0380",
+      dark: "#ffea00",
+    },
+  },
 });
 // Create rtl cache
 const cacheRtl = createCache({
