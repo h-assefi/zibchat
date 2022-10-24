@@ -32,21 +32,19 @@ const UserLayout = (props) => {
   };
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBarMenu
-        navItems={navItems}
-        handleDrawerToggle={handleDrawerToggle}
-      ></AppBarMenu>
-      <AppBarDrawer
-        window={window}
-        handleDrawerToggle={handleDrawerToggle}
-        mobileOpen={mobileOpen}
-        navItems={navItems}
-      ></AppBarDrawer>
-      <Box component="main" sx={{ p: 3, width: "100%" }}>
-        <Toolbar />
-
-        <Router>
-          <React.Fragment>
+      <Router>
+        <AppBarMenu
+          navItems={navItems}
+          handleDrawerToggle={handleDrawerToggle}
+        ></AppBarMenu>
+        <AppBarDrawer
+          window={window}
+          handleDrawerToggle={handleDrawerToggle}
+          mobileOpen={mobileOpen}
+          navItems={navItems}
+        ></AppBarDrawer>
+        <Box component="main" sx={{ width: "100%" }}>
+          <div style={{ paddingTop: 64 }}>
             <Routes>
               <Route path="/d" element={<PrivateRoute />}>
                 <Route path="/d/*" element={<AdminLayout />} />
@@ -63,9 +61,9 @@ const UserLayout = (props) => {
               <Route path="/tutorial" element={<Tutorial />} />
               <Route path="*" element={<Error404 />} />
             </Routes>
-          </React.Fragment>
-        </Router>
-      </Box>
+          </div>
+        </Box>
+      </Router>
     </Box>
   );
 };
