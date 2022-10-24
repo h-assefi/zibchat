@@ -10,13 +10,7 @@ import AppBarMenuUser from "./AppBarMenuUser";
 
 const AppBarMenu = ({ navItems, handleDrawerToggle }) => {
   return (
-    <AppBar
-      component="nav"
-      color="secondary"
-      dir="rtl"
-      elevation={10}
-      enableColorOnDark={true}
-    >
+    <AppBar component="nav" color="secondary">
       <Toolbar>
         <IconButton
           color="inherit"
