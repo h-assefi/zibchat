@@ -8,6 +8,9 @@ import { prefixer } from "stylis";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ProSidebarProvider } from "react-pro-sidebar";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -55,9 +58,11 @@ root.render(
   <React.StrictMode>
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
-        <div dir="rtl">
-          <App />
-        </div>
+        <ProSidebarProvider>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ProSidebarProvider>
       </ThemeProvider>
     </CacheProvider>
   </React.StrictMode>
