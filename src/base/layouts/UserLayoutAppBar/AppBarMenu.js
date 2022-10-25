@@ -7,8 +7,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import ZButton from "src/base/coreServices/components/button/ZButton";
 import AppBarMenuUser from "./AppBarMenuUser";
+import { useNavigate } from "react-router-dom";
 
 const AppBarMenu = ({ navItems, handleDrawerToggle }) => {
+  const navigate = useNavigate();
   return (
     <AppBar component="nav" color="secondary">
       <Toolbar>
@@ -28,7 +30,7 @@ const AppBarMenu = ({ navItems, handleDrawerToggle }) => {
               key={item.route}
               sx={{ color: "white" }}
               onClick={() => {
-                window.location.href = item.route;
+                navigate(item.route);
               }}
             >
               {item.title}

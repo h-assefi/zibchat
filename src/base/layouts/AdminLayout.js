@@ -1,40 +1,29 @@
 import * as React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Dashboard from "../views/admin/Dashboard";
-import Settings from "../views/admin/Settings";
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
-import Error404 from "../views/general/Error404";
-import Profile from "../views/admin/profile/Profile";
-// <!-- Icons -->
-import "src/assets/vendor/fonts/boxicons.css";
-import "src/assets/vendor/fonts/fontawesome.css";
-import "src/assets/vendor/fonts/flag-icons.css";
-// <!-- Core CSS -->
-import "src/assets/vendor/css/rtl/core.css";
-import "src/assets/vendor/css/rtl/theme-default.css";
-import "src/assets/css/demo.css";
-import "src/assets/vendor/css/rtl/rtl.css";
-import "src/assets/css/adminLayout.css";
-// <!-- Vendors CSS -->
-import "src/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css";
-import "src/assets/vendor/libs/typeahead-js/typeahead.css";
-import MySidebar from "./AdminLayout/Sidebar/MySidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { IconButton, Toolbar, Typography } from "@mui/material";
 import { useProSidebar } from "react-pro-sidebar";
 import ZIcon, { ZIcons } from "../coreServices/components/icon/ZIcon";
-import { useSelector } from "react-redux";
-
-const navItems = [
-  { title: "خانه", route: "/" },
-  { title: "درباره ما", route: "/aboutus" },
-  { title: "امکانات", route: "/features" },
-  { title: "قیمت", route: "/pricing" },
-  { title: "پایگاه دانش", route: "/tutorial" },
-];
+// STYLES
+import "src/assets/css/rtl/core.css";
+import "src/assets/css/adminLayout.css";
+import "src/assets/css/demo.css";
+// VIEWS
+import Error404 from "../views/general/Error404";
+import Profile from "../views/admin/profile/Profile";
+import Dashboard from "../views/admin/Dashboard";
+import Settings from "../views/admin/Settings";
+import MySidebar from "./AdminLayout/Sidebar/MySidebar";
+import ZSnackbar from "../coreServices/components/snackbar/ZSnackbar";
+import { ZAlertVariant } from "../coreServices/components/alert/ZAlert";
+import { showSnackbar } from "src/redux/reducers/adminLayoutSnackbarSlice";
 
 const AdminLayout = (props) => {
+  const dispatch = useDispatch();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { toggleSidebar, broken } = useProSidebar();
   const { routeName } = useSelector((state) => state.route);
+  const { status } = useSelector((state) => state.adminLayoutSnackbar);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -70,6 +59,14 @@ const AdminLayout = (props) => {
           </div>
         </div>
       </div>
+      <ZSnackbar
+        open={status.show}
+        onClose={() => dispatch(showSnackbar({ show: false }))}
+        message={status.message}
+        severity={status.severity}
+        alert
+        alertVariant={ZAlertVariant.filled}
+      />
     </div>
   );
 };

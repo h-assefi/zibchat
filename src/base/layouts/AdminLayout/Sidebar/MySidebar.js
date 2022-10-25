@@ -21,7 +21,7 @@ const MySidebar = () => {
     const { component, title, badge, icon, ...rest } = item;
     const Component = component;
     return (
-      <ZToolTip title={title}>
+      <ZToolTip title={title} key={index}>
         <Component
           key={index}
           {...rest}
