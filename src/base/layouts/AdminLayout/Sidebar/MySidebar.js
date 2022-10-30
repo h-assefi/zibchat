@@ -18,23 +18,36 @@ const MySidebar = () => {
   const dispatch = useDispatch();
   const { collapseSidebar, collapsed } = useProSidebar();
   const navItem = (item, index) => {
-    const { component, title, badge, icon, ...rest } = item;
+    const { component, title, badge, icon, menuItems, ...rest } = item;
     const Component = component;
-    return (
-      <ZToolTip title={title} key={index}>
-        <Component
-          key={index}
-          {...rest}
-          icon={icon}
-          onClick={() => {
-            navigate(item.to);
-            dispatch(setRouteName(title));
-          }}
-        >
-          {title}
+    if (component === SubMenu) {
+      return (
+        <Component key={index} label={title} icon={icon}>
+          {menuItems &&
+            menuItems.map((item, index) => {
+              return navItem(item, "menu_" + index);
+            })}
         </Component>
-      </ZToolTip>
-    );
+      );
+    } else {
+      return (
+        <ZToolTip title={title} key={index}>
+          <Component
+            key={index}
+            {...rest}
+            icon={icon}
+            onClick={() => {
+              if (item.to) {
+                navigate(item.to);
+                dispatch(setRouteName(title));
+              }
+            }}
+          >
+            {title}
+          </Component>
+        </ZToolTip>
+      );
+    }
   };
 
   return (
