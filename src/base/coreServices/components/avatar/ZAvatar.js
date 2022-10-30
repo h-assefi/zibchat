@@ -8,10 +8,12 @@ export const ZAvatarVariant = {
 
 const ZAvatar = ({
   alt,
+  backgroundColor,
   src,
   variant = ZAvatarVariant.circular,
   width,
   height,
+
   ...rest
 }) => {
   return (
@@ -19,7 +21,7 @@ const ZAvatar = ({
       alt={alt}
       src={src}
       variant={variant}
-      sx={{ width: width, height: height }}
+      sx={{ width: width, height: height, bgcolor: backgroundColor }}
       {...rest}
     ></Avatar>
   );
