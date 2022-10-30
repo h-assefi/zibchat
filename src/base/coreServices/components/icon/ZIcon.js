@@ -20,16 +20,47 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import AddIcon from "@mui/icons-material/Add";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
+import EditIcon from "@mui/icons-material/Edit";
+import CheckIcon from "@mui/icons-material/Check";
+
+export const ZIconColor = {
+  inherit: "inherit",
+  action: "action",
+  disabled: "disabled",
+  primary: "primary",
+  secondary: "secondary",
+  error: "error",
+  info: "info",
+  success: "success",
+  warning: "warning",
+};
 
 export const ZIcons = {
   accountBalance: "accountBalance",
+  add: "add",
   adjust: "adjust",
+  appartment: "appartment",
   apps: "apps",
   arrowLeft: "arrowLeft",
   arrowRight: "arrowRight",
   camera: "camera",
+  check: "check",
+  clock: "clock",
   close: "close",
   dashborad: "dashborad",
+  delete: "delete",
+  deleteOutline: "deleteOutline",
+  diversity3Icon: "diversity3Icon",
+  edit: "edit",
   email: "email",
   emptyCircle: "emptyCircle",
   fingerPrint: "fingerPrint",
@@ -37,16 +68,21 @@ export const ZIcons = {
   home: "home",
   logout: "logout",
   menu: "menu",
+  messageCheckIcon: "messageCheckIcon",
+  moreVerticalIcon: "moreVerticalIcon",
   profile: "profile",
   receiptLog: "receiptLog",
   shoppingCartAdd: "shoppingCartAdd",
   sms: "sms",
+  supportAgent: "supportAgent",
   visibility: "visibility",
   visibilityOff: "visibilityOff",
 };
 
 const ZIcon = ({ icon, ...rest }) => {
   if (icon === ZIcons.fingerPrint) return <Fingerprint {...rest} />;
+  else if (icon === ZIcons.add) return <AddIcon {...rest} />;
+  else if (icon === ZIcons.check) return <CheckIcon {...rest} />;
   else if (icon === ZIcons.camera) return <CameraAltIcon {...rest} />;
   else if (icon === ZIcons.close) return <CloseIcon {...rest} />;
   else if (icon === ZIcons.shoppingCartAdd)
@@ -70,6 +106,17 @@ const ZIcon = ({ icon, ...rest }) => {
   else if (icon === ZIcons.menu) return <MenuIcon {...rest} />;
   else if (icon === ZIcons.logout) return <LogoutIcon {...rest} />;
   else if (icon === ZIcons.profile) return <PermIdentityIcon {...rest} />;
+  else if (icon === ZIcons.moreVerticalIcon) return <MoreVertIcon {...rest} />;
+  else if (icon === ZIcons.diversity3Icon) return <Diversity3Icon {...rest} />;
+  else if (icon === ZIcons.appartment) return <ApartmentIcon {...rest} />;
+  else if (icon === ZIcons.delete) return <DeleteIcon {...rest} />;
+  else if (icon === ZIcons.clock) return <AccessTimeIcon {...rest} />;
+  else if (icon === ZIcons.supportAgent) return <SupportAgentIcon {...rest} />;
+  else if (icon === ZIcons.edit) return <EditIcon {...rest} />;
+  else if (icon === ZIcons.messageCheckIcon)
+    return <MarkChatReadIcon {...rest} />;
+  else if (icon === ZIcons.deleteOutline)
+    return <DeleteOutlineIcon {...rest} />;
   else return <QuestionMark {...rest} />;
 };
 
