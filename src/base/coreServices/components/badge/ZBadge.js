@@ -10,9 +10,31 @@ export const ZBadgeColor = {
   warning: "warning",
 };
 
-const ZBadge = ({ badgeContent, children }) => {
+export const ZBadgeVariant = {
+  dot: "dot",
+  standard: "standard",
+};
+
+const ZBadge = ({
+  badgeContent,
+  children,
+  color,
+  horizontal = "left",
+  overlap,
+  variant = ZBadgeVariant.standard,
+  vertical = "top",
+}) => {
   return (
-    <Badge color={ZBadgeColor.primary} badgeContent={badgeContent}>
+    <Badge
+      color={color ?? ZBadgeColor.primary}
+      variant={variant}
+      badgeContent={badgeContent}
+      overlap={overlap}
+      anchorOrigin={{
+        vertical: vertical,
+        horizontal: horizontal,
+      }}
+    >
       {children}
     </Badge>
   );
