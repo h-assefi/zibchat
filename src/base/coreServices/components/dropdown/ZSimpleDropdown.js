@@ -7,6 +7,7 @@ const ZSimpleDropdown = React.forwardRef(
     {
       data,
       error,
+      fullWidth,
       id,
       label,
       name,
@@ -15,11 +16,20 @@ const ZSimpleDropdown = React.forwardRef(
       value,
       valueField,
       open,
+      size,
+      itemTempelate,
+      width,
+      ...rest
     },
     ref
   ) => {
     return (
-      <FormControl sx={{ m: 1, minWidth: 120 }} error={error}>
+      <FormControl
+        sx={{ m: 1, minWidth: 120, width: width }}
+        error={error}
+        size={size}
+        fullWidth={fullWidth}
+      >
         {label && (
           <InputLabel id="demo-simple-select-readonly-label">
             {label}
@@ -33,12 +43,13 @@ const ZSimpleDropdown = React.forwardRef(
           value={value}
           open={open}
           ref={ref}
+          {...rest}
         >
           {data && data.length > 0 ? (
             data.map((item) => {
               return (
                 <MenuItem key={item[valueField]} value={item[valueField]}>
-                  {item[textField]}
+                  {itemTempelate ? itemTempelate(item) : item[textField]}
                 </MenuItem>
               );
             })
