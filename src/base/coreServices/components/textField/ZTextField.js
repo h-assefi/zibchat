@@ -1,4 +1,4 @@
-import { InputAdornment } from "@mui/material";
+import { InputAdornment, InputBase } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import * as React from "react";
 
@@ -6,6 +6,7 @@ export const ZTextFieldVariant = {
   outlined: "outlined",
   filled: "filled",
   standard: "standard",
+  inputBase: "inputBase",
 };
 
 export const ZTextFieldType = {
@@ -56,38 +57,51 @@ const ZTextField = React.forwardRef(
     },
     ref
   ) => {
-    return (
-      <TextField
-        {...rest}
-        color={color}
-        defaultValue={defaultValue}
-        disabled={disabled}
-        error={error}
-        fullWidth={fullWidth}
-        helperText={helperText}
-        id={id}
-        InputProps={{
-          readOnly: readOnly,
-          startAdornment: startIcon && (
-            <InputAdornment position="start">{startIcon}</InputAdornment>
-          ),
-          endAdornment: endIcon && (
-            <InputAdornment position="end">{endIcon}</InputAdornment>
-          ),
-        }}
-        ref={ref}
-        label={label}
-        maxRows={maxRows}
-        multiline={multiline}
-        onChange={onChange}
-        placeholder={placeholder}
-        required={required}
-        type={type}
-        value={value}
-        variant={variant}
-        size={size}
-      ></TextField>
-    );
+    if (variant !== ZTextFieldVariant.inputBase) {
+      return (
+        <TextField
+          {...rest}
+          color={color}
+          defaultValue={defaultValue}
+          disabled={disabled}
+          error={error}
+          fullWidth={fullWidth}
+          helperText={helperText}
+          id={id}
+          InputProps={{
+            readOnly: readOnly,
+            startAdornment: startIcon && (
+              <InputAdornment position="start">{startIcon}</InputAdornment>
+            ),
+            endAdornment: endIcon && (
+              <InputAdornment position="end">{endIcon}</InputAdornment>
+            ),
+          }}
+          ref={ref}
+          label={label}
+          maxRows={maxRows}
+          multiline={multiline}
+          onChange={onChange}
+          placeholder={placeholder}
+          required={required}
+          type={type}
+          value={value}
+          variant={variant}
+          size={size}
+        ></TextField>
+      );
+    } else {
+      return (
+        <InputBase
+          {...rest}
+          ref={ref}
+          placeholder={placeholder}
+          onChange={onChange}
+          value={value}
+          multiline={multiline}
+        />
+      );
+    }
   }
 );
 
