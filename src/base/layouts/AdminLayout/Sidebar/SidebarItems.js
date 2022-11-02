@@ -21,6 +21,12 @@ const _items = [
     icon: <ZIcon icon={ZIcons.supportAgent} />,
   },
   {
+    component: MenuItem,
+    title: "پنل گفتگو آنلاین",
+    to: "/d/onlinechat",
+    icon: <ZIcon icon={ZIcons.emojiLanugh} />,
+  },
+  {
     component: SubMenu,
     title: "دپارتمان",
     icon: <ZIcon icon={ZIcons.appartment} />,
@@ -36,6 +42,19 @@ const _items = [
         title: "دپارتمان",
         to: "/d/department",
         icon: <ZIcon icon={ZIcons.appartment} />,
+      },
+    ],
+  },
+  {
+    component: SubMenu,
+    title: "آرشیو",
+    icon: <ZIcon icon={ZIcons.inventory} />,
+    menuItems: [
+      {
+        component: MenuItem,
+        title: "آرشیو مکاتبات",
+        to: "/d/archive",
+        icon: <ZIcon icon={ZIcons.inventory} />,
       },
     ],
   },

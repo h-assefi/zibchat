@@ -21,6 +21,7 @@ import Apps from "src/base/views/admin/apps/Apps";
 import DepartmentGroup from "src/base/views/admin/departmentGroup/DepartmentGroup";
 import Departments from "src/base/views/admin/departments/Departments";
 import UserApplication from "../views/admin/userApplication/UserApplication";
+import OnlineChat from "../views/admin/onlineChat/OnlineChat";
 
 const AdminLayout = (props) => {
   const dispatch = useDispatch();
@@ -58,6 +59,8 @@ const AdminLayout = (props) => {
               <Route path="departmentgroup" element={<DepartmentGroup />} />
               <Route path="department" element={<Departments />} />
               <Route path="operators" element={<UserApplication />} />
+              <Route path="onlinechat" element={<OnlineChat />} />
+
               <Route path="*" element={<Error404 />} />
             </Routes>
           </div>
