@@ -22,7 +22,7 @@ const Dashboard = () => {
   return (
     <div>
       <div className="container">
-        <ZFormGroup className="form-box justify-content-center align-items-center">
+        <ZFormGroup>
           <div className="justify-content-around align-items-center">
             <ZView className={"row justify-content-center"}>
               <ZView className={"row align-items-center justify-content-start"}>
