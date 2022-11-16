@@ -39,6 +39,10 @@ import SendIcon from "@mui/icons-material/Send";
 import MicIcon from "@mui/icons-material/Mic";
 import MoveUpIcon from "@mui/icons-material/MoveUp";
 import AddCommentIcon from "@mui/icons-material/AddComment";
+import StopIcon from "@mui/icons-material/Stop";
+import StopCircleIcon from "@mui/icons-material/StopCircle";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import CircleIcon from "@mui/icons-material/Circle";
 
 export const ZIconColor = {
   inherit: "inherit",
@@ -64,6 +68,8 @@ export const ZIcons = {
   attachFile: "attachFile",
   camera: "camera",
   check: "check",
+  checkDouble: "checkDouble",
+  circle: "circle",
   clock: "clock",
   close: "close",
   dashborad: "dashborad",
@@ -90,6 +96,8 @@ export const ZIcons = {
   send: "send",
   shoppingCartAdd: "shoppingCartAdd",
   sms: "sms",
+  stop: "stop",
+  stopCircle: "stopCircle",
   supportAgent: "supportAgent",
   visibility: "visibility",
   visibilityOff: "visibilityOff",
@@ -97,14 +105,18 @@ export const ZIcons = {
 
 const ZIcon = ({ icon, ...rest }) => {
   if (icon === ZIcons.fingerPrint) return <Fingerprint {...rest} />;
+  else if (icon === ZIcons.checkDouble) return <DoneAllIcon {...rest} />;
   else if (icon === ZIcons.add) return <AddIcon {...rest} />;
   else if (icon === ZIcons.addMessage) return <AddCommentIcon {...rest} />;
   else if (icon === ZIcons.attachFile) return <AttachFileIcon {...rest} />;
+  else if (icon === ZIcons.circle) return <CircleIcon {...rest} />;
   else if (icon === ZIcons.mic) return <MicIcon {...rest} />;
   else if (icon === ZIcons.send) return <SendIcon {...rest} />;
   else if (icon === ZIcons.check) return <CheckIcon {...rest} />;
   else if (icon === ZIcons.camera) return <CameraAltIcon {...rest} />;
   else if (icon === ZIcons.moveUp) return <MoveUpIcon {...rest} />;
+  else if (icon === ZIcons.stop) return <StopIcon {...rest} />;
+  else if (icon === ZIcons.stopCircle) return <StopCircleIcon {...rest} />;
   else if (icon === ZIcons.close) return <CloseIcon {...rest} />;
   else if (icon === ZIcons.emojiLanugh) return <InsertEmoticonIcon {...rest} />;
   else if (icon === ZIcons.shoppingCartAdd)
