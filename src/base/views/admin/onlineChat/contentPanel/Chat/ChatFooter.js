@@ -1,26 +1,15 @@
 import * as React from "react";
-import { useForm } from "react-hook-form";
-import { ZAnimation } from "src/base/coreServices/components/animation/ZAnimation";
-import ZButton, {
-  ZButtonVariant,
-} from "src/base/coreServices/components/button/ZButton";
 import ZIconButton from "src/base/coreServices/components/button/ZIconButton";
 import ZIcon, {
   ZIconColor,
   ZIcons,
 } from "src/base/coreServices/components/icon/ZIcon";
-import ZTextField, {
-  ZTextFieldVariant,
-} from "src/base/coreServices/components/textField/ZTextField";
 import { isNullOrEmpty } from "src/base/coreServices/tools/ToolsService";
 import { motion } from "framer-motion";
-import EmojiPicker, { Theme } from "emoji-picker-react";
-import ZFileUpload from "src/base/coreServices/components/fileUpload/ZFileUpload";
-import { IconButton, List, ListItem, ListItemText, Paper } from "@mui/material";
-import ZLabel from "src/base/coreServices/components/Label/ZLabel";
-import ZDivider from "src/base/coreServices/components/divider/ZDivider";
-import QuickReplyPopup from "./QuickReplyPopup";
-import { usePrevious } from "src/base/coreServices/hooks/hooks";
+import TextMessaging from "./footerElements/TextMessaging";
+import AudioRecorder from "./footerElements/AudioRecorder";
+import useRecorder from "src/base/coreServices/hooks/audio/useRecorder";
+import useRecordingsList from "src/base/coreServices/hooks/audio/handlers/use-recordings-list";
 
 const animVariant = {
   hidden: {
@@ -37,72 +26,65 @@ const animVariant = {
   },
 };
 
-const quickReplyVariant = {
-  hidden: {
-    opacity: 0,
-    y: 100,
-    transitionEnd: {
-      display: "none",
-    },
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    display: "block",
-  },
-};
-
 const ChatFooter = ({ onSendClick }) => {
   const [sendVisible, setSendVisible] = React.useState(false);
-  const [textMessage, setTextMessage] = React.useState("");
-  const [emojiVisible, setEmojiVisible] = React.useState(false);
-  const [quickReplyVisible, setQuickReplyVisible] = React.useState(false);
-  const prevTextMessage = usePrevious(textMessage);
+  const { recorderState, startRecording, saveRecording, ...handlers } =
+    useRecorder();
+  const { recordings } = useRecordingsList(recorderState.audio);
+
+  const [data, setData] = React.useState({
+    value: null,
+    type: "audio",
+    status: "",
+  });
+
+  const [audios, setAudios] = React.useState(false);
 
   React.useEffect(() => {
-    if (textMessage) {
-      if (textMessage.startsWith("/") && textMessage.length === 1) {
-        setQuickReplyVisible(true);
-      }
-    } else {
-      if (prevTextMessage && prevTextMessage === "/") {
-        setQuickReplyVisible(false);
+    setSendVisible(!isNullOrEmpty(data.value));
+  }, [data]);
+
+  React.useEffect(() => {
+    if (data.type === "audio") {
+      console.log(audios);
+      console.log(recordings);
+      if (audios) {
+        if (recordings.length > 0) {
+          console.log("1");
+          setData({ type: "audio", status: "", value: recordings[0] });
+        }
+      } else {
+        console.log("2");
+        setData({ type: "text", status: "", value: null });
       }
     }
-  }, [textMessage]);
+  }, [audios, recordings]);
 
   const attachFileClick = () => {};
 
-  const quickReplyClick = () => {
-    setQuickReplyVisible(!quickReplyVisible);
-  };
-  const emojiClick = () => {
-    setEmojiVisible(!emojiVisible);
-  };
-
-  const onEmojiPicked = (emojiData, event) => {
-    setTextMessage(textMessage + "" + emojiData.emoji);
-  };
   const sendClick = () => {
     if (onSendClick) {
-      onSendClick(textMessage);
+      onSendClick(data);
     }
   };
-  const micClick = () => {};
 
-  const textMessageChange = (event) => {
-    setSendVisible(!isNullOrEmpty(event.target.value));
-    setTextMessage(event.target.value);
+  const onTextChange = (data) => {
+    setData(data);
   };
 
-  const onQuickReplyClick = (replyText) => {
-    if (textMessage.startsWith("/")) {
-      setTextMessage(`${textMessage.substring(1)} ${replyText}`);
+  const micClick = () => {
+    console.log(data);
+    if (data.status === "") {
+      console.log(data.status);
+
+      startRecording();
+      setData({ value: null, type: "audio", status: "recording" });
     } else {
-      setTextMessage(`${textMessage} ${replyText}`);
+      console.log(data.status);
+
+      saveRecording();
+      setAudios(true);
     }
-    setQuickReplyVisible(false);
-    setSendVisible(true);
   };
 
   return (
@@ -115,7 +97,7 @@ const ChatFooter = ({ onSendClick }) => {
       }}
       className={
         " d-flex flex-row  rounded py-1 bg-gray" +
-        (textMessage.includes("\n")
+        (data.type === "text" && data.value && data.value.includes("\n")
           ? " align-items-end "
           : " align-items-center ")
       }
@@ -134,47 +116,34 @@ const ChatFooter = ({ onSendClick }) => {
         animate={sendVisible ? "hidden" : "visible"}
         initial="visible"
       >
-        <ZIconButton onClick={micClick}>
-          <ZIcon icon={ZIcons.mic} color={ZIconColor.primary} />
-        </ZIconButton>
+        <motion.div
+          variants={animVariant}
+          animate={data.status === "recording" ? "visible" : "hidden"}
+          initial="hidden"
+        >
+          <ZIconButton onClick={micClick}>
+            <ZIcon icon={ZIcons.stopCircle} color={ZIconColor.primary} />
+          </ZIconButton>
+        </motion.div>
+        <motion.div
+          variants={animVariant}
+          animate={data.status === "recording" ? "hidden" : "visible"}
+          initial="visible"
+        >
+          <ZIconButton onClick={micClick}>
+            <ZIcon icon={ZIcons.mic} color={ZIconColor.primary} />
+          </ZIconButton>
+        </motion.div>
       </motion.div>
-      <ZIconButton onClick={quickReplyClick}>
-        <ZIcon icon={ZIcons.sms} />
-      </ZIconButton>
-      <ZTextField
-        id="textMessage"
-        onChange={textMessageChange}
-        className="bg-white rounded px-2 flex-grow-1"
-        variant={ZTextFieldVariant.inputBase}
-        value={textMessage}
-        multiline
-        placeholder="برای دسترسیءء سریع به پیام های آماده / "
-      />
 
-      <IconButton aria-label="upload picture" component="label">
-        <ZFileUpload />
-        <ZIcon icon={ZIcons.attachFile} />
-      </IconButton>
-      <ZIconButton onClick={emojiClick} className="">
-        <ZIcon icon={ZIcons.emojiLanugh} />
-      </ZIconButton>
-      {emojiVisible && (
-        <div style={{ position: "absolute", bottom: 50, left: 0 }}>
-          <EmojiPicker
-            onEmojiClick={onEmojiPicked}
-            autoFocusSearch={false}
-            theme={Theme.AUTO}
-          />
-        </div>
+      {data.type === "text" && <TextMessaging onTextChange={onTextChange} />}
+      {data.type === "audio" && (
+        <AudioRecorder
+          handlers={handlers}
+          recorderState={recorderState}
+          onDelete={() => setAudios(false)}
+        />
       )}
-      <motion.div
-        style={{ position: "absolute", bottom: 50, left: 0, width: "100%" }}
-        variants={quickReplyVariant}
-        animate={quickReplyVisible ? "visible" : "hidden"}
-        initial="hidden"
-      >
-        <QuickReplyPopup onClick={onQuickReplyClick} />
-      </motion.div>
     </div>
   );
 };
