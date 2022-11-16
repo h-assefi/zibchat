@@ -3,7 +3,7 @@ import { isNullOrEmpty } from "src/base/coreServices/tools/ToolsService";
 const ChatTextReceive = ({ item, index }) => {
   return (
     <div key={"div_re_" + index} className={"chat-item receive"}>
-      {item.value
+      {item.value.value
         .trim()
         .split("\n")
         .map((paragraph, index2) => {
