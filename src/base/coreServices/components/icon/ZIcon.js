@@ -43,6 +43,7 @@ import StopIcon from "@mui/icons-material/Stop";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import CircleIcon from "@mui/icons-material/Circle";
+import LoginIcon from "@mui/icons-material/Login";
 
 export const ZIconColor = {
   inherit: "inherit",
@@ -84,6 +85,7 @@ export const ZIcons = {
   headsetMic: "headsetMic",
   home: "home",
   inventory: "inventory",
+  login: "login",
   logout: "logout",
   menu: "menu",
   messageCheckIcon: "messageCheckIcon",
@@ -141,6 +143,7 @@ const ZIcon = ({ icon, ...rest }) => {
   else if (icon === ZIcons.arrowRight) return <ChevronRightIcon {...rest} />;
   else if (icon === ZIcons.menu) return <MenuIcon {...rest} />;
   else if (icon === ZIcons.logout) return <LogoutIcon {...rest} />;
+  else if (icon === ZIcons.login) return <LoginIcon {...rest} />;
   else if (icon === ZIcons.profile) return <PermIdentityIcon {...rest} />;
   else if (icon === ZIcons.moreVerticalIcon) return <MoreVertIcon {...rest} />;
   else if (icon === ZIcons.diversity3Icon) return <Diversity3Icon {...rest} />;
