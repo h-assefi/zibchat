@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import ZButton, {
   ZButtonType,
   ZButtonVariant,
@@ -10,13 +9,14 @@ import ZSpacer from "src/base/coreServices/components/container/ZSpacer";
 import ZDialog from "src/base/coreServices/components/dialog/ZDialog";
 import ZSimpleDropdown from "src/base/coreServices/components/dropdown/ZSimpleDropdown";
 import ZLabel from "src/base/coreServices/components/Label/ZLabel";
-import { ZSnackbarSeverity } from "src/base/coreServices/components/snackbar/ZSnackbar";
 import ZTextField from "src/base/coreServices/components/textField/ZTextField";
-import { showSnackbar } from "src/redux/reducers/adminLayoutSnackbarSlice";
+import {
+  showToast,
+  ZToastType,
+} from "src/base/coreServices/components/toast/ZToast";
 
 const NewDepartment = ({ onClose, departmentGroupId }) => {
   console.log(departmentGroupId);
-  const dispatch = useDispatch();
   const groups = [
     { id: 1, title: "گروه شماره 1" },
     { id: 2, title: "گروه شماره 2" },
@@ -31,13 +31,9 @@ const NewDepartment = ({ onClose, departmentGroupId }) => {
     // Validate form and check item not duplicate
     console.log(data.group);
     onClose({ title: data.title, departmentId: data.group });
-    dispatch(
-      showSnackbar({
-        show: true,
-        message: "ثبت دپارتمان جدید با موفقیت انجام شد",
-        severity: ZSnackbarSeverity.success,
-      })
-    );
+    showToast("ثبت دپارتمان جدید با موفقیت انجام شد", {
+      type: ZToastType.Success,
+    });
   };
 
   return (

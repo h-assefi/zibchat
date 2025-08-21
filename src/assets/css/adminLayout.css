@@ -12,7 +12,7 @@
   }
 
   .chat-column-userpanel{
-    height: calc(100vh - 235px);
+    height: calc(100vh - 275px);
     overflow-y: auto;
   }
 

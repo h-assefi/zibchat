@@ -19,7 +19,6 @@ const ChatBody = ({ body }) => {
     <div className="border d-flex flex-column w-100 flex-grow-1 overflow-auto p-3 ">
       {body.map((item, index) => {
         // if( item.send)
-        console.log(body.length);
         if (item.value.type === "text") {
           if (index % 2 === 0)
             return <ChatTextSend item={item} index={index} key={index} />;

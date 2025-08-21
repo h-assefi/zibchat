@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import ZAvatar from "src/base/coreServices/components/avatar/ZAvatar";
 import ZButton, {
   ZButtonType,
@@ -11,12 +10,13 @@ import { ZFormGroup } from "src/base/coreServices/components/container/ZFormGrou
 import ZSpacer from "src/base/coreServices/components/container/ZSpacer";
 import ZDialog from "src/base/coreServices/components/dialog/ZDialog";
 import ZLabel from "src/base/coreServices/components/Label/ZLabel";
-import { ZSnackbarSeverity } from "src/base/coreServices/components/snackbar/ZSnackbar";
 import ZTextField from "src/base/coreServices/components/textField/ZTextField";
-import { showSnackbar } from "src/redux/reducers/adminLayoutSnackbarSlice";
+import {
+  showToast,
+  ZToastType,
+} from "src/base/coreServices/components/toast/ZToast";
 
 const NewApp = ({ onClose }) => {
-  const dispatch = useDispatch();
   const [pickedColor, setPickedColor] = React.useState({
     show: false,
     hexColor: "#6a0380",
@@ -34,13 +34,9 @@ const NewApp = ({ onClose }) => {
       domainName: data.domainName,
       appColor: pickedColor.hexColor,
     });
-    dispatch(
-      showSnackbar({
-        show: true,
-        message: "ثبت سایت جدید با موفقیت انجام شد",
-        severity: ZSnackbarSeverity.success,
-      })
-    );
+    showToast("ثبت سایت جدید با موفقیت انجام شد", {
+      type: ZToastType.Success,
+    });
   };
 
   const onColorPickerClose = (color) => {

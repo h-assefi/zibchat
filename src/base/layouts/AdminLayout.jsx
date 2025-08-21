@@ -1,12 +1,9 @@
 import * as React from "react";
 import { Route, Routes } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IconButton, Toolbar, Typography } from "@mui/material";
 import { useProSidebar } from "react-pro-sidebar";
 import ZIcon, { ZIcons } from "src/base/coreServices/components/icon/ZIcon";
-import ZSnackbar from "src/base/coreServices/components/snackbar/ZSnackbar";
-import { ZAlertVariant } from "src/base/coreServices/components/alert/ZAlert";
-import { showSnackbar } from "src/redux/reducers/adminLayoutSnackbarSlice";
 // STYLES
 import "src/assets/css/rtl/core.css";
 import "src/assets/css/adminLayout.css";
@@ -24,10 +21,8 @@ import UserApplication from "../views/admin/userApplication/UserApplication";
 import OnlineChat from "../views/admin/onlineChat/OnlineChat";
 
 const AdminLayout = (props) => {
-  const dispatch = useDispatch();
   const { toggleSidebar, broken } = useProSidebar();
   const { routeName } = useSelector((state) => state.route);
-  const { status } = useSelector((state) => state.adminLayoutSnackbar);
 
   return (
     <div className="layout-wrapper layout-content-navbar">
@@ -66,14 +61,6 @@ const AdminLayout = (props) => {
           </div>
         </div>
       </div>
-      <ZSnackbar
-        open={status.show}
-        onClose={() => dispatch(showSnackbar({ show: false }))}
-        message={status.message}
-        severity={status.severity}
-        alert
-        alertVariant={ZAlertVariant.filled}
-      />
     </div>
   );
 };

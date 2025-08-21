@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useForm } from "react-hook-form";
 import ZButton, {
   ZButtonType,
@@ -8,11 +9,12 @@ import ZSpacer from "src/base/coreServices/components/container/ZSpacer";
 import ZDialog from "src/base/coreServices/components/dialog/ZDialog";
 import ZTextField from "src/base/coreServices/components/textField/ZTextField";
 import {
-  ZToastType,
   showToast,
+  ZToastPosition,
+  ZToastType,
 } from "src/base/coreServices/components/toast/ZToast";
 
-const NewDepartmentGroup = ({ onClose }) => {
+const NewQuickReply = ({ onClose }) => {
   const {
     register,
     handleSubmit,
@@ -21,21 +23,29 @@ const NewDepartmentGroup = ({ onClose }) => {
 
   const save = (data) => {
     // Validate form and check item not duplicate
-    onClose({ title: data.title });
-    showToast("ثبت گروه دپارتمان جدید با موفقیت انجام شد", {
+    console.log(data.group);
+    onClose({ key: data.shortcutKey, text: data.text });
+    showToast("پیام جدید ثبت شد", {
+      position: ZToastPosition.BottomRight,
       type: ZToastType.Success,
     });
   };
 
   return (
-    <ZDialog open={true} onClose={onClose} title={"ثبت گروه دپارتمان جدید"}>
+    <ZDialog open={true} onClose={onClose} title={"ثبت پیام آماده جدید"}>
       <form onSubmit={handleSubmit(save)}>
         <ZFormGroup className="form-box">
           <ZTextField
-            {...register("title", { required: true })}
-            label="عنوان گروه دپارتمان"
-            helperText={errors.name && "عنوان گروه دپارتمان را وارد کنید"}
-            error={errors && errors.name ? true : false}
+            {...register("shortcutKey", { required: true })}
+            label="میانبر"
+            helperText={errors.shortcutKey && "میانبر را وارد کنید"}
+            error={errors && errors.shortcutKey ? true : false}
+          />
+          <ZTextField
+            {...register("text", { required: true })}
+            label="متن پیام"
+            helperText={errors.text && "متن پیام را وارد کنید"}
+            error={errors && errors.text ? true : false}
           />
           <ZSpacer />
           <div className="row" dir="rtl">
@@ -59,4 +69,4 @@ const NewDepartmentGroup = ({ onClose }) => {
   );
 };
 
-export default NewDepartmentGroup;
+export default NewQuickReply;

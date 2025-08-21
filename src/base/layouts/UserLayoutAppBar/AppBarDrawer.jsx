@@ -7,8 +7,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
+import { headerNavigation } from "./navigationItems";
 
-const AppBarDrawer = ({ window, mobileOpen, handleDrawerToggle, navItems }) => {
+const AppBarDrawer = ({ window, mobileOpen, handleDrawerToggle }) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const drawer = (
@@ -18,7 +19,7 @@ const AppBarDrawer = ({ window, mobileOpen, handleDrawerToggle, navItems }) => {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
+        {headerNavigation.map((item) => (
           <ListItem key={item.route} disablePadding>
             <ListItemButton
               sx={{ textAlign: "center" }}

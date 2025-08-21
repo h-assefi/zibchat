@@ -1,5 +1,4 @@
 import { Paper } from "@mui/material";
-import ZLabel from "src/base/coreServices/components/Label/ZLabel";
 import ChatContent from "./ChatContent";
 import ContentPanelEmpty from "./ContentPanelEmpty";
 

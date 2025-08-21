@@ -15,21 +15,20 @@ const UserPanelSearch = () => {
   } = useForm();
 
   return (
-    <div className="d-flex flex-row align-items-center justify-content-between px-1">
+    <div className="d-flex flex-column justify-content-between px-3 pt-2">
       <ZLabel variant="h6" className=" col-4" sx={{ fontWeight: "bold" }}>
         مکالمهءءها
       </ZLabel>
-      <div className="col-8">
-        <div className="d-flex flex-row">
-          <ZTextField
-            {...register("search")}
-            placeholder="جستجو"
-            variant={ZTextFieldVariant.inputBase}
-          ></ZTextField>
-          <ZIconButton onClick={() => {}}>
-            <ZIcon icon={ZIcons.search}></ZIcon>
-          </ZIconButton>
-        </div>
+      <div className="d-flex flex-row ">
+        <ZTextField
+          {...register("search")}
+          placeholder="جستجو"
+          className="w-100"
+          variant={ZTextFieldVariant.inputBase}
+        ></ZTextField>
+        <ZIconButton onClick={() => {}}>
+          <ZIcon icon={ZIcons.search}></ZIcon>
+        </ZIconButton>
       </div>
     </div>
   );

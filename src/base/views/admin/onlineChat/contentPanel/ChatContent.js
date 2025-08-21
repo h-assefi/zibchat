@@ -6,15 +6,16 @@ import ChatHeader from "./Chat/ChatHeader";
 const ChatContent = () => {
   const [body, setBody] = React.useState([]);
   React.useEffect(() => {}, [body]);
+
+  const onSendClick = (value) => {
+    setBody([...body, { value: value }]);
+  };
+
   return (
     <>
       <ChatHeader />
       <ChatBody body={body} />
-      <ChatFooter
-        onSendClick={(value) => {
-          setBody([...body, { value: value }]);
-        }}
-      />
+      <ChatFooter onSendClick={onSendClick} />
     </>
   );
 };

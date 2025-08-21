@@ -22,13 +22,13 @@ import {
   IsPasswordValid,
 } from "src/base/coreServices/tools/ToolsService";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { useDispatch } from "react-redux";
-import { showSnackbar } from "src/redux/reducers/adminLayoutSnackbarSlice";
-import { ZSnackbarSeverity } from "src/base/coreServices/components/snackbar/ZSnackbar";
 import ZIconButton from "src/base/coreServices/components/button/ZIconButton";
+import {
+  ZToastType,
+  showToast,
+} from "src/base/coreServices/components/toast/ZToast";
 
 const Profile = () => {
-  const dispatch = useDispatch();
   let minPasslength = 6;
   let useNumberInPass = true,
     useCompoundInPass = true,
@@ -70,23 +70,16 @@ const Profile = () => {
     ) {
       if (data.newPassword === data.confirmPassword) {
       } else {
-        dispatch(
-          showSnackbar({
-            show: true,
-            message: "رمز ورود جدید و تکرار آن یکسان نیست",
-            severity: ZSnackbarSeverity.error,
-          })
-        );
+        showToast("رمز ورود جدید و تکرار آن یکسان نیست", {
+          type: ZToastType.Error,
+        });
+
         return false;
       }
     } else {
-      dispatch(
-        showSnackbar({
-          show: true,
-          message: "رمز عبور صحیح نمی باشد.\nقوانین رمز گذاری را بررسی کنید",
-          severity: ZSnackbarSeverity.error,
-        })
-      );
+      showToast("رمز عبور صحیح نمی باشد.\nقوانین رمز گذاری را بررسی کنید", {
+        type: ZToastType.Error,
+      });
       return false;
     }
   };

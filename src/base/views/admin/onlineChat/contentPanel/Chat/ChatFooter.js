@@ -26,15 +26,26 @@ const animVariant = {
   },
 };
 
+export const DataTypes = {
+  text: "text",
+  audio: "audio",
+};
+
+export const AudioStatus = {
+  none: "",
+  recording: "recording",
+};
+
 const ChatFooter = ({ onSendClick }) => {
   const [sendVisible, setSendVisible] = React.useState(false);
+  const [clearText, setClearText] = React.useState(false);
   const { recorderState, startRecording, saveRecording, ...handlers } =
     useRecorder();
   const { recordings } = useRecordingsList(recorderState.audio);
 
   const [data, setData] = React.useState({
     value: null,
-    type: "audio",
+    type: DataTypes.audio,
     status: "",
   });
 
@@ -45,17 +56,21 @@ const ChatFooter = ({ onSendClick }) => {
   }, [data]);
 
   React.useEffect(() => {
-    if (data.type === "audio") {
-      console.log(audios);
-      console.log(recordings);
+    if (data.type === DataTypes.audio) {
       if (audios) {
         if (recordings.length > 0) {
-          console.log("1");
-          setData({ type: "audio", status: "", value: recordings[0] });
+          setData({
+            type: DataTypes.audio,
+            status: AudioStatus.none,
+            value: recordings[0],
+          });
         }
       } else {
-        console.log("2");
-        setData({ type: "text", status: "", value: null });
+        setData({
+          type: DataTypes.text,
+          status: AudioStatus.none,
+          value: null,
+        });
       }
     }
   }, [audios, recordings]);
@@ -65,23 +80,29 @@ const ChatFooter = ({ onSendClick }) => {
   const sendClick = () => {
     if (onSendClick) {
       onSendClick(data);
+      onClearText();
+      setData({ type: DataTypes.text, status: AudioStatus.none, value: null });
     }
   };
 
   const onTextChange = (data) => {
     setData(data);
+    setClearText(false);
   };
 
-  const micClick = () => {
-    console.log(data);
+  const onClearText = () => {
+    if (data.type === "text") setClearText(true);
+  };
+
+  const onMicClick = () => {
     if (data.status === "") {
-      console.log(data.status);
-
       startRecording();
-      setData({ value: null, type: "audio", status: "recording" });
+      setData({
+        value: null,
+        type: DataTypes.audio,
+        status: AudioStatus.recording,
+      });
     } else {
-      console.log(data.status);
-
       saveRecording();
       setAudios(true);
     }
@@ -121,7 +142,7 @@ const ChatFooter = ({ onSendClick }) => {
           animate={data.status === "recording" ? "visible" : "hidden"}
           initial="hidden"
         >
-          <ZIconButton onClick={micClick}>
+          <ZIconButton onClick={onMicClick}>
             <ZIcon icon={ZIcons.stopCircle} color={ZIconColor.primary} />
           </ZIconButton>
         </motion.div>
@@ -130,13 +151,18 @@ const ChatFooter = ({ onSendClick }) => {
           animate={data.status === "recording" ? "hidden" : "visible"}
           initial="visible"
         >
-          <ZIconButton onClick={micClick}>
+          <ZIconButton onClick={onMicClick}>
             <ZIcon icon={ZIcons.mic} color={ZIconColor.primary} />
           </ZIconButton>
         </motion.div>
       </motion.div>
 
-      {data.type === "text" && <TextMessaging onTextChange={onTextChange} />}
+      {data.type === "text" && (
+        <TextMessaging
+          onTextChange={onTextChange}
+          clearTextMessage={clearText}
+        />
+      )}
       {data.type === "audio" && (
         <AudioRecorder
           handlers={handlers}

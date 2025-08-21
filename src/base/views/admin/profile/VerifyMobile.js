@@ -1,21 +1,21 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import ZLabel from "src/base/coreServices/components/Label/ZLabel";
 import ZButton, {
   ZButtonType,
   ZButtonVariant,
 } from "src/base/coreServices/components/button/ZButton";
 import ZSpacer from "src/base/coreServices/components/container/ZSpacer";
-import { ZSnackbarSeverity } from "src/base/coreServices/components/snackbar/ZSnackbar";
-import ZText from "src/base/coreServices/components/text/ZText";
 import ZTextField, {
   ZTextFieldType,
 } from "src/base/coreServices/components/textField/ZTextField";
+import {
+  ZToastType,
+  showToast,
+} from "src/base/coreServices/components/toast/ZToast";
 import ZView from "src/base/coreServices/components/view/ZView";
-import { showSnackbar } from "src/redux/reducers/adminLayoutSnackbarSlice";
 
 export const VerifyMobile = ({ onVerified }) => {
-  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -32,13 +32,9 @@ export const VerifyMobile = ({ onVerified }) => {
   const verifyMobile = (data) => {
     if (verifyState.stage === "sendCode") {
       //SEND SMS CODE
-      dispatch(
-        showSnackbar({
-          show: true,
-          message: "کد تایید با موفقیت ارسال شد",
-          severity: ZSnackbarSeverity.info,
-        })
-      );
+      showToast("کد تایید با موفقیت ارسال شد", {
+        type: ZToastType.Info,
+      });
       setVerifyState({
         codeRequired: true,
         mobileRequired: false,
@@ -52,21 +48,13 @@ export const VerifyMobile = ({ onVerified }) => {
         if (onVerified) {
           onVerified(true);
         }
-        dispatch(
-          showSnackbar({
-            show: true,
-            message: "شماره موبایل با موفقیت تایید شد",
-            severity: ZSnackbarSeverity.success,
-          })
-        );
+        showToast("شماره موبایل با موفقیت تایید شد", {
+          type: ZToastType.Error,
+        });
       } else {
-        dispatch(
-          showSnackbar({
-            show: true,
-            message: "کد نامعتبر است",
-            severity: ZSnackbarSeverity.error,
-          })
-        );
+        showToast("کد نامعتبر است", {
+          type: ZToastType.Success,
+        });
       }
     }
   };
@@ -75,7 +63,7 @@ export const VerifyMobile = ({ onVerified }) => {
     <form onSubmit={handleSubmit(verifyMobile)}>
       <ZView className={"align-items-center card pb-4"} style={{ width: 250 }}>
         <div className="card-header">
-          <ZText variant="h6">شماره موبایل تایید نشده است.</ZText>
+          <ZLabel variant="h6">شماره موبایل تایید نشده است.</ZLabel>
         </div>
         <ZTextField
           type={ZTextFieldType.number}

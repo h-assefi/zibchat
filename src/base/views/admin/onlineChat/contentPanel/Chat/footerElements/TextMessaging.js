@@ -11,6 +11,7 @@ import QuickReplyPopup from "../QuickReplyPopup";
 import * as React from "react";
 import { usePrevious } from "src/base/coreServices/hooks/hooks";
 import { motion } from "framer-motion";
+import { AudioStatus, DataTypes } from "../ChatFooter";
 
 const quickReplyVariant = {
   hidden: {
@@ -27,11 +28,16 @@ const quickReplyVariant = {
   },
 };
 
-const TextMessaging = ({ onTextChange }) => {
+const TextMessaging = ({ onTextChange, clearTextMessage }) => {
   const [textMessage, setTextMessage] = React.useState("");
   const [emojiVisible, setEmojiVisible] = React.useState(false);
   const [quickReplyVisible, setQuickReplyVisible] = React.useState(false);
   const prevTextMessage = usePrevious(textMessage);
+  React.useEffect(() => {
+    if (clearTextMessage) {
+      setTextMessage("");
+    }
+  }, [clearTextMessage]);
 
   React.useEffect(() => {
     // setSendVisible(!isNullOrEmpty(textMessage));
@@ -46,7 +52,11 @@ const TextMessaging = ({ onTextChange }) => {
       }
     }
 
-    onTextChange({ value: textMessage, type: "text", status: "" });
+    onTextChange({
+      value: textMessage,
+      type: DataTypes.text,
+      status: AudioStatus.none,
+    });
   }, [textMessage]);
 
   const quickReplyClick = () => {

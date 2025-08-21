@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-const ZLabel = ({ children, ...rest }) => {
+const ZLabel = ({ children, size, ...rest }) => {
   return <Typography {...rest}>{children}</Typography>;
 };
 
