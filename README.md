@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# ZibChat
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ZibChat is a modern, modular web-based chat and customer support platform built with React, Redux, and Material-UI. It is designed for organizations to manage online conversations, support tickets, and user profiles efficiently. The project supports right-to-left (RTL) layouts and is localized for Persian (Farsi) users.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **User Authentication:**  
+  Registration, login, and password recovery flows using forms with validation and feedback.
 
-### `npm start`
+- **Profile Management:**  
+  Users can view and edit their profile, change passwords, and verify their mobile number and email address.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Online Chat System:**  
+  Real-time chat interface for operators and users, including:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  - Text messaging
+  - Audio message recording and playback
+  - File attachments
+  - Quick reply templates
+  - User panel for managing conversations
 
-### `npm test`
+- **Department & Group Management:**  
+  Admins can create and manage departments and department groups for organizing support teams.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **App Management:**  
+  Ability to register and configure multiple client applications/sites, including color customization.
 
-### `npm run build`
+- **UI/UX:**
+  - Responsive design with RTL support
+  - Custom themes and fonts
+  - Toast notifications and confirmation dialogs
+  - Modular, reusable UI components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `src/`
+  - `assets/`: Static assets (CSS, fonts, images)
+  - `base/`
+    - `coreServices/`: Shared UI components and utilities
+    - `layouts/`: Application layouts
+    - `views/`: Feature pages (auth, admin, chat, profile, etc.)
+  - `redux/`: State management (store, reducers)
+  - `App.js`, `index.js`: Application entry points
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Getting Started
 
-### `npm run eject`
+### Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js (v14+ recommended)
+- npm
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```sh
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Running the App
 
-## Learn More
+```sh
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Building for Production
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+npm run build
+```
 
-### Code Splitting
+### Running Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```sh
+npm test
+```
 
-### Analyzing the Bundle Size
+## Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- React
+- Redux
+- Material-UI (MUI)
+- react-hook-form
+- framer-motion
+- Bootstrap (RTL)
+- SweetAlert2
+- Emoji Picker
+- Date-fns-jalali
 
-### Making a Progressive Web App
+## Customization
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **RTL Support:**  
+  The app is fully RTL-compatible for Persian/Farsi users.
+- **Theming:**  
+  Easily customizable colors and fonts via the theme provider.
+- **Component-Based:**  
+  UI is built from reusable components in [`src/base/coreServices/components`](src/base/coreServices/components).
 
-### Advanced Configuration
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project is private and not licensed for public use.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For more details, see the source code in the [`src`](src)
